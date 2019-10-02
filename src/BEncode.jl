@@ -24,7 +24,7 @@ function bparsestring(val::AbstractString)
     thislength = parse(Int,splitstr[1])
     if length(splitstr[2]) > thislength
         thisstring = splitstr[2][1:thislength]
-        return thisstring, splitstr[2][thislength + 1:end]
+        return convert(String, thisstring), splitstr[2][thislength + 1:end]
     else
         return splitstr[2]
     end
@@ -41,7 +41,7 @@ function bparseint(val::AbstractString)
 end
 
 function bparsearray(val::AbstractString)
-    array = Union{AbstractString,Int,Array,Dict}[]
+    array = Union{String,Int,Array,Dict}[]
     while val[1] != 'e'
         entry, val = bdecode(val)
         push!(array, entry)
